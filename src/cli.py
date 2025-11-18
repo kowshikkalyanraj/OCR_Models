@@ -1,4 +1,3 @@
-# src/cli.py
 import sys
 import os
 import json
@@ -9,6 +8,8 @@ from tqdm import tqdm
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.groq_extractor import extract_fields_from_ocr
+from database import ocr_labels
+
 
 def process_file(input_path, output_path):
     """Process raw OCR text file and extract structured data."""
@@ -27,17 +28,14 @@ def process_file(input_path, output_path):
         for idx, raw_text in enumerate(tqdm(lines, desc="Processing"), 1):
             result = extract_fields_from_ocr(raw_text)
             
-            # Combine input and output
             output_record = {
                 "record_id": idx,
                 "input": raw_text,
                 **result
             }
             
-            # Write as JSONL
             outfile.write(json.dumps(output_record) + '\n')
             
-            # Print to console
             print(f"\n✅ Record {idx}:")
             print(f"   Name: {result.get('name')}")
             print(f"   Address: {result.get('address')}")
@@ -45,6 +43,27 @@ def process_file(input_path, output_path):
     
     print("\n" + "=" * 80)
     print(f"✓ Extraction complete! Results saved to: {output_path}")
+    
+    # --- Process database entries too ---
+    print("\n================ DATABASE RECORDS ================\n")
+    for i, label in enumerate(ocr_labels, start=1):
+        print(f"Label {i}:")
+        
+        # If it's a string → extract fields automatically
+        if isinstance(label, str):
+            parsed = extract_fields_from_ocr(label)
+            print(f"  Name: {parsed.get('name')}")
+            print(f"  Address: {parsed.get('address')}")
+            print(f"  Tracking: {parsed.get('tracking_number')}")
+        elif isinstance(label, dict):
+            print(f"  Name: {label.get('Name')}")
+            print(f"  Address: {label.get('Address')}")
+            print(f"  Tracking: {label.get('Tracking Number')}")
+        else:
+            print("  ⚠️ Invalid format in database entry")
+        
+        print("-" * 60)
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
