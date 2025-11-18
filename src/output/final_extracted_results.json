@@ -1,0 +1,42 @@
+{
+    "Total_Texts_Processed": 6,
+    "Total_Execution_Time_Seconds": 0.001,
+    "Results": [
+        {
+            "Name": null,
+            "Address": null,
+            "TrackingNumber": "TBA132376390000",
+            "TimeTaken": 0.001
+        },
+        {
+            "Name": null,
+            "Address": "2164 n, roseville ca",
+            "TrackingNumber": null,
+            "TimeTaken": 0.0
+        },
+        {
+            "Name": null,
+            "Address": "2821 carradale dr, roseville ca",
+            "TrackingNumber": "1ZV4W1950365006276",
+            "TimeTaken": 0.0
+        },
+        {
+            "Name": null,
+            "Address": null,
+            "TrackingNumber": "TBA098191199000",
+            "TimeTaken": 0.0
+        },
+        {
+            "Name": null,
+            "Address": null,
+            "TrackingNumber": null,
+            "TimeTaken": 0.0
+        },
+        {
+            "Name": null,
+            "Address": "roseville ca",
+            "TrackingNumber": null,
+            "TimeTaken": 0.0
+        }
+    ]
+}
