@@ -47,7 +47,6 @@ def extract_entities(texts):
             "CleanedText": cleaned_text,
             "TimeTaken": round(clean_end - clean_start, 3)
         })
-
     total_time = time.time() - start_time
 
     final_output = {
@@ -55,7 +54,6 @@ def extract_entities(texts):
         "Total_Execution_Time_Seconds": round(total_time, 3),
         "Results": results
     }
-
     # Save to JSON file automatically
     with open("final_extracted_results.json", "w", encoding="utf-8") as f:
         json.dump(final_output, f, indent=4, ensure_ascii=False)
